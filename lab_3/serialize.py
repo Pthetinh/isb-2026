@@ -26,7 +26,7 @@ def save_public_key(public_key: rsa.RSAPublicKey, path: str) -> None:
         )
 
 
-def load_private_key(path: str) -> None:
+def load_private_key(path: str) -> rsa.RSAPrivateKey:
     """Загрузите закрытый ключ RSA из PEM-файла."""
 
     with open(path, "rb") as f:
@@ -36,3 +36,14 @@ def load_private_key(path: str) -> None:
         )
     
 
+def save_binary(data: bytes, path: str) -> None:
+    """Сохранить двоичные данные в файл."""
+    
+    with open(path, "wb") as f:
+        f.write(data)
+    
+def load_binary(path: str) -> bytes:
+    """Прочитать двоичные данные из файла."""
+    
+    with open(path, "rb") as f:
+        return f.read()
