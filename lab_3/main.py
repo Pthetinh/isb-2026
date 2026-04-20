@@ -42,6 +42,8 @@ def generate_mode(pub_path: str, priv_path: str, sym_path: str) -> None:
 
 
 def encrypt_mode(input_path: str, output_path: str, priv_path: str, sym_path: str) -> None:
+    """Для шифрования файлов используется гибридное шифрование (RSA + IDEA)."""
+
     check_parent_dir(output_path)
 
     private_key = load_private_key(priv_path)
@@ -57,6 +59,8 @@ def encrypt_mode(input_path: str, output_path: str, priv_path: str, sym_path: st
     print("Файл успешно зашифрован.")
 
 def decrypt_mode(input_path: str, output_path: str, priv_path: str, sym_path: str) -> None:
+    """Расшифровка файла, зашифрованного с использованием гибридного шифрования (RSA + IDEA)."""
+
     check_parent_dir(output_path)
 
     private_key = load_private_key(priv_path)
@@ -71,6 +75,8 @@ def decrypt_mode(input_path: str, output_path: str, priv_path: str, sym_path: st
 
 
 def main() -> None:
+    """Основная функция"""
+
     parser = argparse.ArgumentParser()
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument('-gen', '--generation', action='store_true', help='Запускает режим генерации ключей')
