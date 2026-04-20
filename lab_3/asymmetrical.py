@@ -1,6 +1,7 @@
 from cryptography.hazmat.primitives.asymmetric import rsa, padding
 from cryptography.hazmat.primitives import hashes
 
+
 def generate_rsa_keys() -> tuple[rsa.RSAPrivateKey, rsa.RSAPublicKey]:
     """Генерация пар ключей RSA для асимметричной криптографии."""
 
@@ -9,10 +10,11 @@ def generate_rsa_keys() -> tuple[rsa.RSAPrivateKey, rsa.RSAPublicKey]:
         key_size = 2048
     )
     public_key = private_key.public_key()
+    print('Сгенерированы ключи асимметричного шифрования')
     return private_key, public_key
 
 
-def encrypt_symmetric_key(sym_key: bytes, public_key: rsa.RSAPublicKey) -> bytes:
+def encrypt_sym_key(sym_key: bytes, public_key: rsa.RSAPublicKey) -> bytes:
     """Симметричное шифрование с использованием открытого ключа RSA."""
     
     encrypted_sym_key = public_key.encrypt(
@@ -23,10 +25,11 @@ def encrypt_symmetric_key(sym_key: bytes, public_key: rsa.RSAPublicKey) -> bytes
             label=None
         )    
     )
+    print('Ключ зашифрован алгоритмом асимметричного шифрования')
     return encrypted_sym_key
 
 
-def decrypt_symmetric_key(encrypted_sym_key: bytes, private_key: rsa.RSAPrivateKey) -> bytes:
+def decrypt_sym_key(encrypted_sym_key: bytes, private_key: rsa.RSAPrivateKey) -> bytes:
     """Расшифруйте симметричный ключ, зашифрованный с помощью RSA."""
     
     sym_key = private_key.decrypt(
@@ -37,5 +40,5 @@ def decrypt_symmetric_key(encrypted_sym_key: bytes, private_key: rsa.RSAPrivateK
             label=None
         )
     )
-
+    print('Ключ, зашифрованный алгоритмом асимметричного шифрования, расшифрован')
     return sym_key
