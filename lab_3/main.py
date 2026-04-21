@@ -88,33 +88,30 @@ def main() -> None:
     args = parser.parse_args()
     settings =  load_settings(args.settings)
 
-    public_key_path = settings.get("public_key", "keys/public.pem")
-    private_key_path = settings.get("private_key", "keys/private.pem")
-    sym_key_path = settings.get("sym_key", "keys/sym.key")
-    input_path = settings.get("input_file")
-
-    if args.generation:
-        print('Режим генерации ключей начинается...')
-        generate_mode(public_key_path, private_key_path, sym_key_path)
-        return
+    try:
+        public_key_path = settings["public_key"]
+        private_key_path = settings["private_key"]
+        sym_key_path = settings["sym_key"]
+        input_enc_path = settings["input_file"]
+        output_enc_path = settings["encrypted_file"]
+        input_dec_path = settings["encrypted_file"]
+        output_dec_path = settings["decrypted_file"]
+    except KeyError as e:
+        raise ValueError(f"В настройках отсутствует путь к файлу: {e}")
     
-    elif args.encryption:
-        print('Режим шифрования начинается...')
-        if input_path is None:
-            raise ValueError("Отсутствует входной файл. Используйте --in или добавьте 'input_file' в settings.json")
-        output_path = settings.get("encrypted_file", "data/encrypted.bin")
-
-        encrypt_mode(input_path, output_path, private_key_path, sym_key_path)
-        return
-
-    else:
-        print('Режим дешифрования начинается...')
-        input_path = settings.get("encrypted_file", "data/encrypted.bin")
-        output_path = settings.get("decrypted_file", "data/decrypted.txt")
-
-        decrypt_mode(input_path, output_path, private_key_path, sym_key_path)
-        return
-    
+    match args:
+        case args.generation:
+            print("Режим генерации ключей начинается...")
+            generate_mode(public_key_path, private_key_path, sym_key_path)
+            return  
+        
+        case args.encryption:
+            print("Режим шифрования начинается...")
+            encrypt_mode(input_enc_path, output_enc_path, private_key_path, sym_key_path)
+            return
+        case args.decryption:
+            print("Режим деширования начинается...")
+            decrypt_mode(input_dec_path, output_dec_path, private_key_path, sym_key_path)
 
 if __name__ == "__main__":
     main()
