@@ -3,7 +3,10 @@ from cryptography.hazmat.primitives import hashes
 
 
 def generate_rsa_keys() -> tuple[rsa.RSAPrivateKey, rsa.RSAPublicKey]:
-    """Генерация пар ключей RSA для асимметричной криптографии."""
+    """
+    Генерация пар ключей RSA для асимметричной криптографии.
+    :return: закрытый ключ (RSAPrivateKey) и открытый ключ (RSAPublicKey)
+    """
 
     private_key = rsa.generate_private_key(
         public_exponent = 65537,
@@ -15,7 +18,12 @@ def generate_rsa_keys() -> tuple[rsa.RSAPrivateKey, rsa.RSAPublicKey]:
 
 
 def encrypt_sym_key(sym_key: bytes, public_key: rsa.RSAPublicKey) -> bytes:
-    """Симметричное шифрование с использованием открытого ключа RSA."""
+    """
+    Симметричное шифрование с использованием открытого ключа RSA.
+    :param sym_key: симметричный ключ для шифрования
+    :param public_key: открытый ключ RSA
+    :return: зашифрованный
+    """
     
     encrypted_sym_key = public_key.encrypt(
         sym_key, 
@@ -30,7 +38,12 @@ def encrypt_sym_key(sym_key: bytes, public_key: rsa.RSAPublicKey) -> bytes:
 
 
 def decrypt_sym_key(encrypted_sym_key: bytes, private_key: rsa.RSAPrivateKey) -> bytes:
-    """Расшифруйте симметричный ключ, зашифрованный с помощью RSA."""
+    """
+    Расшифруйте симметричный ключ, зашифрованный с помощью RSA.
+    :param encrypted_sym_key: зашифровванный симметричный ключ
+    :param private_key: закрытый ключ RSA
+    :return: расшифрованный ключ
+    """
     
     sym_key = private_key.decrypt(
         encrypted_sym_key,

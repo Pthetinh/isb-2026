@@ -8,23 +8,42 @@ import argparse
 SETTING_FILE = 'Settings.json'
 
 def load_settings(path: str) -> dict:
-    """Считывание конфигурации из JSON-файла."""
+    """
+    Считывание конфигурации из JSON-файла.
+    :param path: путь к json-файлу 
+    :return: словарь с настройками из json-файла
+    """
 
-    with open(path, "r", encoding="utf-8") as f:
-        return json.load(f)
-
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except OSError as e:
+        print(f"Системная ошибка при чтении файла {path}: {e}")
 
 def check_parent_dir(path: str) -> None:
-    """Обеспечить существование каталога для файла, 
-    автоматически создать, если он не существует."""
+    """
+    Обеспечить существование каталога для файла, 
+    автоматически создать, если он не существует.
+    :param path: путь к файлу, для которого нужно создать родительскую директорию
+    :return: не возврашается
+    """
 
     folder = os.path.dirname(path)
     if folder:
-        os.makedirs(folder, exist_ok=True)
+        try:
+            os.makedirs(folder, exist_ok=True)
+        except OSError as e:
+            print(f"Ошибка при создании директории {folder} : {e}")
 
 
 def generate_mode(pub_path: str, priv_path: str, sym_path: str) -> None:
-    """Генерация ключей для гибридной системы RSA + IDEA."""
+    """
+    Генерация ключей для гибридной системы RSA + IDEA.
+    :param pub_path: путь к открытый ключ
+    :param priv_path: путь к закрытый ключ
+    :param sym_path: путь к симметрический ключ
+    :return: не возврашается
+    """
 
     check_parent_dir(pub_path)
     check_parent_dir(priv_path)
@@ -42,7 +61,14 @@ def generate_mode(pub_path: str, priv_path: str, sym_path: str) -> None:
 
 
 def encrypt_mode(input_path: str, output_path: str, priv_path: str, sym_path: str) -> None:
-    """Для шифрования файлов используется гибридное шифрование (RSA + IDEA)."""
+    """
+    Для шифрования файлов используется гибридное шифрование (RSA + IDEA).
+    :param input_path: путь к исходному файлу для шифрования
+    :param output_path: путь для сохранения зашифрованного файла
+    :param priv_path: путь к закрытый ключ 
+    :param sym_path: путь к файлу с зашифрованным симметричным ключом
+    :return: не возврашается
+    """
 
     check_parent_dir(output_path)
 
@@ -59,7 +85,14 @@ def encrypt_mode(input_path: str, output_path: str, priv_path: str, sym_path: st
     print("Файл успешно зашифрован.")
 
 def decrypt_mode(input_path: str, output_path: str, priv_path: str, sym_path: str) -> None:
-    """Расшифровка файла, зашифрованного с использованием гибридного шифрования (RSA + IDEA)."""
+    """
+    Расшифровка файла, зашифрованного с использованием гибридного шифрования (RSA + IDEA).
+    :param input_path: зашифрованный файл
+    :param output_path: расшифрованный выходной файл
+    :param priv_path: путь к закрытый ключ 
+    :param sym_path: Файл с зашифрованным симметричным ключом
+    :return: None
+    """
 
     check_parent_dir(output_path)
 
