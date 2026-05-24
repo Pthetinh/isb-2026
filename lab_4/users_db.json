@@ -1,0 +1,50 @@
+{
+    "phanthetinh2004": {
+        "hash": "66c5ffbd6bf5f52316da5d81b1378ee68c1326a57e77235089a11da42cccc212",
+        "salt": null
+    },
+    "dfasdf": {
+        "hash": "15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225",
+        "salt": null
+    },
+    "pthetinh": {
+        "hash": "de570b8ca46e1b41586c4a354db54d8b19cb1c8c1fbaa845545491ec7a157875",
+        "salt": "dc8c1be782589e785e7e4e527323172a"
+    },
+    "pthetinh1": {
+        "hash": "54bd2213d8292f089ff0825dce7ce5bb6bca3bc4d72d786cd08aaa74fa2b4e03",
+        "salt": null
+    },
+    "pthetinh2": {
+        "hash": "15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225",
+        "salt": null
+    },
+    "pthetinh3": {
+        "hash": "15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225",
+        "salt": null
+    },
+    "pthetinh4": {
+        "hash": "a770c2fb435237b6da66e55ef531955010a3724d0e4eb101306441f552a3a0e3",
+        "salt": "ac52484866739fc928cfe8e0432ca7c6"
+    },
+    "pthetinh5": {
+        "hash": "d42012f76685c5780cd967d2ddeb4b4046d8d10165744ce5104a598092c16484",
+        "salt": "2b089815a790f71f41bbe1d03eb357f9"
+    },
+    "user": {
+        "hash": "0d6be69b264717f2dd33652e212b173104b4a647b7c11ae72e9885f11cd312fb",
+        "salt": null
+    },
+    "user_salt": {
+        "hash": "7ca1aa50d9c597b9814e66de5cc347cf4478289e6981506b6e4fe2c16762519b",
+        "salt": "201341812d7abbc9b0031906aeacc89c"
+    },
+    "existing": {
+        "hash": "d74ff0ee8da3b9806b18c877dbf29bbde50b5bd8e4dad7a3a725000feb82e8f1",
+        "salt": null
+    },
+    "username1": {
+        "hash": "0b14d501a594442a01c6859541bcb3e8164d183d32937b851835442f69d5c94e",
+        "salt": null
+    }
+}
