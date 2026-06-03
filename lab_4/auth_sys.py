@@ -12,17 +12,24 @@ def load_db() -> dict:
     """
     if not os.path.exists(DB_FILE):
         return {}
-    with open(DB_FILE, 'r') as f:
-        return json.load(f)
-    
+    try:
+        with open(DB_FILE, 'r') as f:
+            return json.load(f)
+    except OSError as e:
+        print(f"Error reading database file: {e}")
+        return {}
+
 def save_db(db: dict) -> None:
     """
     Сохраняет базу данных пользователей в файл.
     :param db: Словарь с данными пользователей.
     :return: None
     """
-    with open(DB_FILE, 'w') as f:
-        json.dump(db, f, indent=4, ensure_ascii=False)
+    try:
+        with open(DB_FILE, 'w') as f:
+            json.dump(db, f, indent=4, ensure_ascii=False)
+    except OSError as e:
+        print(f"Error saving database: {e}")
 
 def register_user_no_salt(username: str, password: str) -> None:
     """
